@@ -1,0 +1,13 @@
+﻿@model Step2ViewModel
+
+<form asp-action="Step2" method="post">
+    <label for="Email">Email:</label>
+    <input asp-for="Email" />
+    <span asp-validation-for="Email"></span>
+
+    <label for="Phone">Phone:</label>
+    <input asp-for="Phone" />
+    <span asp-validation-for="Phone"></span>
+
+    <button type="submit">Next</button>
+</form>

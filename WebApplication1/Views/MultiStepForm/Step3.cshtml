@@ -1,0 +1,21 @@
+﻿@model Step3ViewModel
+
+<form asp-action="Step3" method="post">
+    <label for="Address">Address:</label>
+    <input asp-for="Address" />
+    <span asp-validation-for="Address"></span>
+
+    <label for="City">City:</label>
+    <input asp-for="City" />
+    <span asp-validation-for="City"></span>
+
+    <label for="County">County:</label>
+    <input asp-for="County" />
+    <span asp-validation-for="County"></span>
+
+    <label for="Postcode">Postcode:</label>
+    <input asp-for="Postcode" />
+    <span asp-validation-for="Postcode"></span>
+
+    <button type="submit">Submit</button>
+</form>
