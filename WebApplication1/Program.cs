@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using WebApplication1.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,13 @@ builder.Services.AddSingleton<DatabaseHelper>();
 
 builder.Services.AddSession();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+    });
 var app = builder.Build();
 
 
@@ -27,7 +35,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication(); // ?? REQUIRED
+app.UseAuthorization();  // ?? REQUIRED
+
 
 app.MapControllerRoute(
     name: "default",
