@@ -1,6 +1,174 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model WebApplication1.Models.BiometricRegistrationViewModel
 
-<p>Use this page to detail your site's privacy policy.</p>
+@{
+    ViewData["Title"] = "Biometric Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Biometric Registration Form</h2>
+
+<div class="progress mb-4">
+    <div id="progressBar" class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+
+<form id="biometricForm" asp-action="SubmitBiometricForm" method="post">
+    <!-- Step 1 -->
+    <div class="card step-form" id="step1">
+        <div class="card-body">
+            <h5 class="card-title">Step 1: Account Information</h5>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="brcodeID">Branch Code</label>
+                    <input type="text" class="form-control" id="brcodeID" name="BrCode" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="actcodeID">Account Code</label>
+                    <input type="text" class="form-control" id="actcodeID" name="ActCode" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="acnoID">Account Number</label>
+                    <input type="text" class="form-control" id="acnoID" name="AcNo" required />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="acnameID">Account Title</label>
+                    <input type="text" class="form-control" id="acnameID" name="AccountTitle" required />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="custidID">Customer ID</label>
+                    <input type="text" class="form-control" id="custidID" name="CustomerId" required />
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary nextBtn">Next</button>
+        </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="card step-form d-none" id="step2">
+        <div class="card-body">
+            <h5 class="card-title">Step 2: Basic Information</h5>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="fatherName">Father Name</label>
+                    <input type="text" class="form-control" name="FatherName" required />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="motherName">Mother Name</label>
+                    <input type="text" class="form-control" name="MotherName" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="mobile">Mobile</label>
+                    <input type="text" class="form-control" name="Mobile" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="Email" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="nid">NID</label>
+                    <input type="text" class="form-control" name="NID" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="smartNid">Smart NID</label>
+                    <input type="text" class="form-control" name="SmartNID" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dob">DOB</label>
+                    <input type="date" class="form-control" name="DOB" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="tin">TIN</label>
+                    <input type="text" class="form-control" name="TIN" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" name="Address" required />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="district">District</label>
+                    <input type="text" class="form-control" name="District" required />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="upazila">Upazila</label>
+                    <input type="text" class="form-control" name="Upazila" required />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control" name="Country" required />
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary prevBtn">Previous</button>
+            <button type="button" class="btn btn-primary nextBtn">Next</button>
+        </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="card step-form d-none" id="step3">
+        <div class="card-body">
+            <h5 class="card-title">Step 3: Maintained Accounts</h5>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="SelectedAccountNumbers" value="123456" id="acc1">
+                <label class="form-check-label" for="acc1">123456</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="SelectedAccountNumbers" value="789012" id="acc2">
+                <label class="form-check-label" for="acc2">789012</label>
+            </div>
+            <button type="button" class="btn btn-secondary prevBtn">Previous</button>
+            <button type="button" class="btn btn-primary nextBtn">Next</button>
+        </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="card step-form d-none" id="step4">
+        <div class="card-body">
+            <h5 class="card-title">Step 4: Fingerprint & OTP</h5>
+            <div class="form-group">
+                <label for="FingerprintStatus">Fingerprint Status</label>
+                <input type="text" class="form-control" name="FingerprintStatus" required />
+            </div>
+            <div class="form-group">
+                <label for="OTP">OTP</label>
+                <input type="text" class="form-control" name="OTP" required />
+            </div>
+            <button type="button" class="btn btn-secondary prevBtn">Previous</button>
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        const steps = document.querySelectorAll(".step-form");
+        const nextBtns = document.querySelectorAll(".nextBtn");
+        const prevBtns = document.querySelectorAll(".prevBtn");
+        let currentStep = 0;
+
+        function showStep(step) {
+            steps.forEach((card, index) => {
+                card.classList.toggle("d-none", index !== step);
+            });
+            const progress = ((step + 1) / steps.length) * 100;
+            document.getElementById("progressBar").style.width = progress + "%";
+        }
+
+        nextBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                if (currentStep < steps.length - 1) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            });
+        });
+
+        prevBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                if (currentStep > 0) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            });
+        });
+
+        showStep(currentStep);
+    </script>
+}
